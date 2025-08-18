@@ -81,9 +81,6 @@ export default function HomePage() {
             </Card>
           </div>
         </div>
-        <ul className="mt-6 list-disc pl-5 text-sm text-base-muted space-y-1 max-w-3xl mx-auto">
-          {HOME.proofPoints.map((p) => <li key={p}>{p}</li>)}
-        </ul>
       </Section>
     </>
   );
