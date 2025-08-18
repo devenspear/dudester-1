@@ -1,7 +1,7 @@
 export const HOME = {
   hero: "Ship the future, not the hype.",
   subhead:
-    "A founder guild from North Carolina's innovation hub, leveraging proven experience to make crisp, human software that is certified due dudeilicious. We move with intuition and evidence, ship small, and let reality edit the roadmap.",
+    "A founder guild from North Carolina's innovation hub, leveraging proven experience to make crisp, human software that is certified dudeilicious. We move with intuition and evidence, ship small, and let reality edit the roadmap.",
   features: [
     {
       title: "The moment",
