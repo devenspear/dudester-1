@@ -5,10 +5,10 @@ import { verify as verifyPassword } from "@node-rs/argon2";
 // Temporary in-memory users with hashed passwords would normally come from DB
 // For now, accept the original four founder emails with a shared password
 const ALLOWED_EMAILS = new Set([
-	"deven@dudester.xyz",
-	"michael@dudester.xyz",
-	"sean@dudester.xyz",
-	"david@dudester.xyz",
+	"davidwwilson@gmail.com",
+	"s.robert.harrison@gmail.com",
+	"mcworthington@me.com",
+	"deven@deven.email",
 ]);
 
 export async function POST(req: Request) {
