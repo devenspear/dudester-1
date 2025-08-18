@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifySession } from "@/src/lib/jwt";
 
-const PUBLIC_PATHS = ["/", "/login", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
+const PUBLIC_PATHS = ["/login", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
