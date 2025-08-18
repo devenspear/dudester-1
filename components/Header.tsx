@@ -1,13 +1,14 @@
+"use client";
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import dynamic from "next/dynamic";
 const AuthStatus = dynamic(() => import("@/components/AuthStatus"), { ssr: false });
 import { useState } from "react";
 import { site } from "@/lib/site";
-import { headers } from "next/headers";
+import { usePathname } from "next/navigation";
 
 function NavItem({ href, label }: { href: string; label: string }) {
-  const current = headers().get("x-pathname") || "";
+  const current = usePathname() || "";
   const active = current === href;
   return (
     <Link
