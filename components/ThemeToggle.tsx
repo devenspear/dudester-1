@@ -10,7 +10,6 @@ export default function ThemeToggle() {
   const next = theme === "dark" ? "light" : "dark";
   return (
     <button aria-label="Toggle theme" onClick={() => setTheme(next)} className="btn" title="Toggle dark mode">
-      <span className="text-xs mr-2">Theme</span>
       <span className="inline-flex items-center gap-1 rounded-full border border-base-border px-2 py-1 text-xs">
         <span className={`${theme === "light" ? "font-semibold" : "text-base-muted"}`}>Light</span>
         <span className="text-base-muted">/</span>
