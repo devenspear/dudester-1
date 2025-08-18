@@ -40,8 +40,25 @@ export default function Discuss() {
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
   const [replyContent, setReplyContent] = useState("");
   
-  // Simulate current user
-  const currentUser = MOCK_FOUNDERS[Math.floor(Math.random() * MOCK_FOUNDERS.length)];
+  // Use email from session if available; fallback to first founder
+  const getCurrentUser = () => {
+    if (typeof document !== "undefined") {
+      const m = document.cookie.match(/(?:^|; )session=([^;]+)/);
+      if (m) {
+        try {
+          const token = decodeURIComponent(m[1]);
+          const parts = token.split(".");
+          if (parts.length > 1) {
+            const json = typeof atob !== "undefined" ? atob(parts[1]) : Buffer.from(parts[1], "base64").toString();
+            const data = JSON.parse(json) as { email?: string };
+            if (data.email) return data.email;
+          }
+        } catch {}
+      }
+    }
+    return MOCK_FOUNDERS[0];
+  };
+  const currentUser = getCurrentUser();
 
   const handleCreatePost = (e: React.FormEvent) => {
     e.preventDefault();

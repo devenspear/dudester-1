@@ -3,6 +3,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { cookies } from "next/headers";
 import { decodeSessionEmail } from "@/src/lib/jwt";
 import LogoutButton from "@/components/LogoutButton";
+import { Suspense } from "react";
+import ClientIdent from "@/components/ClientIdent";
 import { site } from "@/lib/site";
 import { headers } from "next/headers";
 
@@ -27,11 +29,12 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 glass">
       <div className="container-max flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-2">
           <span className="sr-only">Home</span>
-          {email && (
-            <span className="text-xs text-base-muted">{email}</span>
-          )}
+          <Suspense fallback={email ? <span className="text-xs text-base-muted">{email}</span> : null}>
+            <ClientIdent serverEmail={email} />
+          </Suspense>
+          {email && <LogoutButton />}
         </Link>
         <nav className="hidden md:flex items-center gap-2">
           {site.nav.map((n) => (
@@ -39,7 +42,6 @@ export default function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          {email && <LogoutButton />}
           <ThemeToggle />
         </div>
       </div>
