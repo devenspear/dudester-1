@@ -9,6 +9,7 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/home";
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,10 +22,15 @@ export default function LoginPage() {
         body: JSON.stringify({ email, password }),
       });
       if (res.ok) {
-        router.push(redirect as any);
+        setError(null);
+        router.replace(redirect as any);
+      } else {
+        const data = await res.json().catch(() => ({} as any));
+        setError(data?.error || "Invalid email or password");
       }
     } catch (error) {
       console.error("Login failed:", error);
+      setError("Network error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -33,11 +39,11 @@ export default function LoginPage() {
   return (
     <div className="min-h-[100dvh] flex items-center justify-center">
       <div className="w-full max-w-sm">
-        <div className="space-y-3">
+        <form onSubmit={(e)=>{e.preventDefault(); if(!loading) handleDevLogin();}} className="space-y-3">
           <input
             type="email"
             className="w-full rounded-2xl border border-base-border bg-base-bg p-3 text-sm"
-            placeholder="email@dudester.xyz"
+            placeholder="you@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -51,13 +57,14 @@ export default function LoginPage() {
             required
           />
           <button
-            onClick={handleDevLogin}
-            disabled={loading}
+            type="submit"
+            disabled={loading || !email || !password}
             className="btn btn-primary w-full"
           >
             {loading ? "Entering…" : "Enter"}
           </button>
-        </div>
+          {error && <p className="text-xs text-red-600 mt-2">{error}</p>}
+        </form>
       </div>
     </div>
   );

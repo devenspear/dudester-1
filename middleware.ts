@@ -5,7 +5,7 @@ const PUBLIC_PATHS = ["/login", "/manifest.webmanifest", "/icon-192.png", "/icon
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const isPublic = PUBLIC_PATHS.some((p) => pathname.startsWith(p))
+  const isPublic = PUBLIC_PATHS.some((p) => pathname === p)
     || pathname.startsWith("/_next")
     || pathname.startsWith("/assets")
     || pathname.startsWith("/favicon")
