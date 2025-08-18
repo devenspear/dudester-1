@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { site } from "@/lib/site";
 import Header from "@/components/Header";
-import BottomNav from "@/components/BottomNav";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "next-themes";
 import Backdrop from "@/components/Backdrop";
@@ -37,9 +36,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Backdrop />
           {/* Hide chrome on login route via CSS targeting; middleware ensures lock-out elsewhere */}
           <Header />
-          <main className="min-h-[calc(100dvh-4rem)]">{children}</main>
+          <main className="min-h-[calc(100dvh-4rem)] page-pad">{children}</main>
           <Footer />
-          <BottomNav />
         </ThemeProvider>
       </body>
     </html>

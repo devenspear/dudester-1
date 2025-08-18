@@ -46,6 +46,8 @@ body{
 }
 
 .container-max{@apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;}
+/* Ensure min body padding on narrow iOS */
+.page-pad{padding-left:env(safe-area-inset-left, 12px); padding-right:env(safe-area-inset-right, 12px);} 
 
 /* Components */
 .glass{@apply bg-base-card/70 backdrop-blur-xl border border-base-border;}
