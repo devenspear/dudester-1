@@ -2,6 +2,7 @@ import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import { cookies } from "next/headers";
 import { decodeSessionEmail } from "@/src/lib/jwt";
+import LogoutButton from "@/components/LogoutButton";
 import { site } from "@/lib/site";
 import { headers } from "next/headers";
 
@@ -38,6 +39,7 @@ export default function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          {email && <LogoutButton />}
           <ThemeToggle />
         </div>
       </div>
