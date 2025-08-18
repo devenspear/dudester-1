@@ -30,6 +30,10 @@ body{
   text-rendering:optimizeLegibility;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
+  /* iOS: prevent horizontal drift */
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* Hide app chrome on the login page */
@@ -53,8 +57,8 @@ body{
 .link{@apply underline underline-offset-4 hover:opacity-80;}
 
 /* Headings scale (fluid) */
-.h1{font-size:clamp(2.5rem, 5vw, 3.75rem); line-height:1.05; font-weight:800; letter-spacing:-0.02em; background:linear-gradient(90deg,#ff7e3f 0%,#c9712c 40%,#36e2a0 100%); -webkit-background-clip:text; background-clip:text; color:transparent;}
-.h2{font-size:clamp(1.75rem, 3vw, 2.25rem); line-height:1.1; font-weight:700; background:linear-gradient(90deg,#ff7e3f 0%,#c9712c 40%,#36e2a0 100%); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.h1{font-size:clamp(2.5rem, 5vw, 3.75rem); line-height:1.05; font-weight:800; letter-spacing:-0.02em; background:linear-gradient(90deg,#ff7e3f 0%,#c9712c 40%,#36e2a0 100%); -webkit-background-clip:text; background-clip:text; color:transparent; text-wrap: balance;}
+.h2{font-size:clamp(1.75rem, 3vw, 2.25rem); line-height:1.1; font-weight:700; background:linear-gradient(90deg,#ff7e3f 0%,#c9712c 40%,#36e2a0 100%); -webkit-background-clip:text; background-clip:text; color:transparent; text-wrap: balance;}
 .p-lead{@apply text-base text-base-muted;}
 .kicker{@apply text-xs uppercase tracking-widest text-base-muted;}
 

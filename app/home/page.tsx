@@ -18,7 +18,7 @@ export default function HomePage() {
       <div className="relative w-full">
         {/* Background Image Container */}
         <div 
-          className="w-full h-[400px] md:h-[500px] lg:h-[600px]"
+          className="w-full h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px]"
           style={{
             backgroundImage: 'url("/images/hero-background.jpeg")',
             backgroundSize: 'contain',
