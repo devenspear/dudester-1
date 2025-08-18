@@ -1,5 +1,9 @@
 export default function LoginLayout({ children }: { children: React.ReactNode }) {
-	return <div className="route-login">{children}</div>;
+  return (
+    <html lang="en">
+      <body className="route-login min-h-[100dvh]">{children}</body>
+    </html>
+  );
 }
 
 

@@ -3,7 +3,7 @@ export const LANDING = {
   subhead:
     "Four RTP founders vibecoding useful software—playful, insightful, relentlessly shipping.",
   ctas: [
-    { label: "Enter", href: "/home", style: "accent" },
+    { label: "Enter", href: "/login", style: "accent" },
     { label: "View Agenda", href: "/agenda", style: "default" }
   ],
   seoDescription:
