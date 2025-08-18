@@ -32,9 +32,10 @@ export default function HomePage() {
       {/* Hero Content Below Image */}
       <Section>
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="h1 mb-6">
-            {HOME.hero}
-          </h1>
+          <h1 className="h1 mb-3">{HOME.hero}</h1>
+          {HOME.subhead && (
+            <p className="text-base text-base-muted max-w-3xl mx-auto">{HOME.subhead}</p>
+          )}
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
             <Link className="btn btn-accent" href="/agenda">See the Summit Agenda</Link>
             <Link className="btn" href="/about">Meet the Founders</Link>
@@ -80,6 +81,9 @@ export default function HomePage() {
             </Card>
           </div>
         </div>
+        <ul className="mt-6 list-disc pl-5 text-sm text-base-muted space-y-1 max-w-3xl mx-auto">
+          {HOME.proofPoints.map((p) => <li key={p}>{p}</li>)}
+        </ul>
       </Section>
     </>
   );

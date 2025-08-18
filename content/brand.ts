@@ -28,19 +28,19 @@ export const BRAND = {
 
 export const PILLARS = [
   {
-    title: "Ageless Innovation",
+    title: "Seasoned Instinct",
     body:
-      "Built since '95, built for '30. Experience isn't baggage—it's compound interest. We invest it in the right problems."
+      "Decades of signal aimed at what’s next. Taste is our moat; simplicity is our weapon."
   },
   {
     title: "Vibecoding Method",
     body:
-      "Use intuition + AI copilots + rapid loops. Demos over decks. The vibe is the brief; working code is the argument."
+      "Feel the experience first, then let copilots draft the scaffolding. Demos > decks, always."
   },
   {
     title: "Launch Bias",
     body:
-      "Ship small, listen hard, iterate fast. Reality trims the roadmap better than any slide ever will."
+      "Small releases. Real users. Ruthless iteration. Reality trims the roadmap better than any slide."
   }
 ];
 

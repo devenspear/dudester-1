@@ -1,27 +1,28 @@
 export const HOME = {
-  hero:
-    "A founder guild of four 60-year-olds vibecoding the future—playful, insightful, relentlessly shipping.",
+  hero: "Ship the future, not the hype.",
+  subhead:
+    "A founder guild from North Carolina's innovation hub, leveraging proven experience to make crisp, human software that is certified due dudeilicious. We move with intuition and evidence, ship small, and let reality edit the roadmap.",
   features: [
     {
-      title: "Why now?",
+      title: "The moment",
       body:
-        "The Web wave became platforms. The AI wave becomes agents. Blockchain becomes trust infrastructure. We build where curves cross: human, opinionated tools that automate the boring and celebrate the useful."
+        "AI is becoming agents; blockchain is becoming trust rails. The intersection is usable magic. That’s our build zone."
     },
     {
       title: "Our edge",
       body:
-        "Four operators with range: product, growth, systems, and strategy. We know what to ignore, when to simplify, and how to launch without ceremony."
+        "Operators who’ve shipped through multiple waves. We cut noise, choose the obvious, and get to first value fast."
     },
     {
-      title: "What you'll see",
+      title: "What you’ll see",
       body:
-        "Quarterly Dudester Drops—compact tools and micro-apps that compound. Some become products. A few become companies."
+        "Dudester Drops—compact tools shipped often. The hits become products; the best become companies."
     }
   ],
   proofPoints: [
-    "Decades shipping across web, mobile, data, and cloud.",
-    "Hands-on with AI toolchains, vector search, agents, and RAG.",
-    "Practical crypto: wallets abstracted, value unlocked, trust preserved.",
-    "Obsessed with TTFH—time-to-first-help for the user."
+    "Shipped across web, mobile, data, cloud, and GTM.",
+    "Fluent with LLM toolchains, agent loops, vector search, and practical RAG.",
+    "Default‑private data. Trust by design. Crypto only where it matters.",
+    "Obsessed with TTFH—how fast a user gets real value."
   ]
 };

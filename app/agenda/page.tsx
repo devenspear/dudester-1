@@ -1,5 +1,6 @@
 import Section from "@/components/Section";
 import { Card } from "@/components/Card";
+import { Clock, CalendarDays } from "lucide-react";
 import { AGENDA } from "@/content";
 
 export default function Agenda(){
@@ -9,30 +10,20 @@ export default function Agenda(){
         <p className="text-base text-base-muted">{AGENDA.theme}</p>
         <p className="mt-2 text-sm text-base-muted">{AGENDA.venue}</p>
 
-        <h3 className="mt-8 text-sm uppercase tracking-widest text-base-muted">Friday</h3>
+        <h2 className="h2 mt-10 flex items-center gap-2"><CalendarDays className="h-5 w-5" /> Friday</h2>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
           {AGENDA.friday.map((i) => (
-            <Card key={i.time} title={`${i.time} — ${i.title}`}>
-              <p>{i.detail}</p>
-              {i.outcomes && (
-                <ul className="mt-2 list-disc pl-5 text-sm text-base-muted space-y-1">
-                  {i.outcomes.map((o) => <li key={o}>{o}</li>)}
-                </ul>
-              )}
+            <Card key={i.time} title={`${i.title}`} icon={<Clock className="h-5 w-5" />}>
+              <p className="text-sm text-base-muted"><span className="font-medium">{i.time}</span> — {i.detail}</p>
             </Card>
           ))}
         </div>
 
-        <h3 className="mt-10 text-sm uppercase tracking-widest text-base-muted">Saturday (Half-Day)</h3>
+        <h2 className="h2 mt-10 flex items-center gap-2"><CalendarDays className="h-5 w-5" /> Saturday (Half-Day)</h2>
         <div className="mt-3 grid gap-4 sm:grid-cols-2">
           {AGENDA.saturday.map((i) => (
-            <Card key={i.time} title={`${i.time} — ${i.title}`}>
-              <p>{i.detail}</p>
-              {i.outcomes && (
-                <ul className="mt-2 list-disc pl-5 text-sm text-base-muted space-y-1">
-                  {i.outcomes.map((o) => <li key={o}>{o}</li>)}
-                </ul>
-              )}
+            <Card key={i.time} title={`${i.title}`} icon={<Clock className="h-5 w-5" />}>
+              <p className="text-sm text-base-muted"><span className="font-medium">{i.time}</span> — {i.detail}</p>
             </Card>
           ))}
         </div>
@@ -41,16 +32,8 @@ export default function Agenda(){
           {AGENDA.roles.map((r) => (
             <Card key={r.name} title={r.name}>{r.focus}</Card>
           ))}
-          <Card title="Rituals">
-            <ul className="list-disc pl-5 text-sm text-base-muted space-y-1">
-              {AGENDA.rituals.map((r) => <li key={r}>{r}</li>)}
-            </ul>
-          </Card>
-          <Card title="Stack Hints">
-            <ul className="list-disc pl-5 text-sm text-base-muted space-y-1">
-              {AGENDA.stackHints.map((s) => <li key={s}>{s}</li>)}
-            </ul>
-          </Card>
+          <Card title="Rituals">{AGENDA.rituals.join(" • ")}</Card>
+          <Card title="Stack Hints">{AGENDA.stackHints.join(" • ")}</Card>
         </div>
       </Section>
     </>

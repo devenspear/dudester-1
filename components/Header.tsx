@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Brand from "@/components/Brand";
 import ThemeToggle from "@/components/ThemeToggle";
 import { site } from "@/lib/site";
 import { headers } from "next/headers";
@@ -24,8 +23,7 @@ export default function Header() {
     <header className="sticky top-0 z-40 glass">
       <div className="container-max flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <Brand />
-          <span className="hidden sm:inline text-sm text-base-muted">{site.tagline}</span>
+          <span className="sr-only">Home</span>
         </Link>
         <nav className="hidden md:flex items-center gap-2">
           {site.nav.map((n) => (
