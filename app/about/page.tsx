@@ -1,35 +1,28 @@
 import Section from "@/components/Section";
-import { Card } from "@/components/Card";
+import { FOUNDERS, ABOUT_PAGE_COPY } from "@/content";
 
-const bios = [
-  {
-    name: "Deven Spear",
-    text: "Multidisciplinary futurist and innovation strategist; decades building at the nexus of wellness, real estate, AI, and blockchain. Systems thinker; relentless shipper."
-  },
-  {
-    name: "Michael C. Worthington",
-    text: "Serial entrepreneur/operator across software, data, and growth. Pragmatic builder who turns vision into dependable execution."
-  },
-  {
-    name: "Sean Harrison",
-    text: "Product-minded technologist focused on UX, scalable systems, and go-to-market orchestration; bridges code, design, and narrative."
-  },
-  {
-    name: "David Wilson",
-    text: "Veteran technologist and business strategist; pattern-spotter in analytics, automation, and durable value creation."
-  }
-];
-
-export default function About() {
+export default function About(){
   return (
-    <Section title="The Founders">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {bios.map(b => (
-          <Card key={b.name} title={b.name}>{b.text}</Card>
+    <Section title={ABOUT_PAGE_COPY.headline} kicker="About">
+      <p className="text-base text-base-muted max-w-3xl mb-8">{ABOUT_PAGE_COPY.subhead}</p>
+      <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto">
+        {FOUNDERS.map((f) => (
+          <div key={f.name} className="card card-hover p-6 flex flex-col">
+            <div className="flex-1 flex flex-col">
+              <div className="mb-4">
+                <h3 className="text-xl font-bold text-base-fg">{f.name}</h3>
+                <p className="text-sm font-medium text-base-accent mt-1">{f.role}</p>
+              </div>
+              <img
+                src={`/images/founder-${f.name.split(' ')[0].toLowerCase()}.png`}
+                alt={`${f.name} portrait`}
+                className="mb-4 w-full rounded-2xl border border-base-border object-cover aspect-square"
+              />
+              <p className="text-sm leading-relaxed text-base-muted flex-1">{f.bio}</p>
+            </div>
+          </div>
         ))}
       </div>
     </Section>
   );
 }
-
-

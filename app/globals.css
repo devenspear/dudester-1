@@ -37,7 +37,7 @@ body{
 /* Components */
 .glass{@apply bg-base-card/70 backdrop-blur-xl border border-base-border;}
 .card{@apply rounded-2xl bg-base-card/95 border border-base-border shadow-soft backdrop-blur;}
-.card-hover{@apply transition duration-200 hover:shadow-lg hover:-translate-y-0.5;}
+.card-hover{@apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02];}
 
 .btn{@apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition border border-base-border bg-base-card hover:bg-base-border/40;}
 .btn-primary{@apply bg-base-fg text-white border-transparent hover:opacity-90;}
@@ -52,7 +52,40 @@ body{
 .kicker{@apply text-xs uppercase tracking-widest text-base-muted;}
 
 /* iOS safe-area helpers */
-.safe{padding-bottom:env(safe-area-inset-bottom);} 
+.safe{padding-bottom:env(safe-area-inset-bottom);}
+
+/* Animations */
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes oscillate {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-card {
+  animation: slideInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-card:hover {
+  animation: oscillate 0.5s ease-in-out;
+} 
 
 /* Decorative background helpers */
 .bg-radial{

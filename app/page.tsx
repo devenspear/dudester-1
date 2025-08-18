@@ -1,21 +1,22 @@
-import Link from "next/link";
 import Section from "@/components/Section";
+import Link from "next/link";
+import { LANDING } from "@/content";
 
-export default function Landing() {
+export default function Landing(){
   return (
-    <Section
-      kicker="Dudester"
-      title={<span className="h1">Wisdom-coded. AI-fueled.</span>}
-    >
-      <p className="max-w-2xl text-base text-base-muted">
-        Four RTP founders vibecoding useful software—and shipping it fast.
-      </p>
-      <div className="mt-6 flex gap-3">
-        <Link href="/login" className="btn btn-accent">Enter Members Area</Link>
-        <Link href="/agenda" className="btn">View Agenda</Link>
+    <Section kicker="Dudester" title={<span className="h1">{LANDING.h1}</span>}>
+      <p className="max-w-2xl text-base text-base-muted">{LANDING.subhead}</p>
+      <div className="mt-6 flex flex-wrap gap-3">
+        {LANDING.ctas.map((c) => (
+          <Link
+            key={c.href}
+            href={c.href}
+            className={`btn ${c.style === "accent" ? "btn-accent" : ""}`}
+          >
+            {c.label}
+          </Link>
+        ))}
       </div>
     </Section>
   );
 }
-
-
