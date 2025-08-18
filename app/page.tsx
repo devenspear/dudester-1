@@ -10,7 +10,7 @@ export default function Landing(){
         {LANDING.ctas.map((c) => (
           <Link
             key={c.href}
-            href={c.href}
+            href={c.href as any}
             className={`btn ${c.style === "accent" ? "btn-accent" : ""}`}
           >
             {c.label}

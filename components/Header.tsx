@@ -9,7 +9,7 @@ function NavItem({ href, label }: { href: string; label: string }) {
   const active = current === href;
   return (
     <Link
-      href={href}
+      href={href as any}
       className={`text-sm rounded-xl px-3 py-1 transition ${
         active ? "bg-base-border/60" : "hover:bg-base-border/40"
       }`}

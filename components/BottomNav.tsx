@@ -11,7 +11,7 @@ export default function BottomNav() {
         {site.nav.filter(n => ["/home","/agenda","/about","/discuss"].includes(n.href)).map(n => (
           <li key={n.href}>
             <Link
-              href={n.href}
+              href={n.href as any}
               className={`block rounded-xl px-2 py-2 text-center text-xs ${pathname===n.href ? "bg-base-border/50" : "hover:bg-base-border/40"}`}
             >
               {n.label}
