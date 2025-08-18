@@ -103,10 +103,6 @@ body{
   opacity: 0;
 }
 
-.animate-card:hover {
-  animation: oscillate 0.5s ease-in-out;
-} 
-
 /* Decorative background helpers */
 .bg-radial{
   background:

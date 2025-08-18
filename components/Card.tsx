@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export function Card({ title, icon, children }: { title?: string; icon?: ReactNode; children: ReactNode; }) {
   return (
-    <div className="card card-hover p-8 h-full">
+    <div className="card p-8 h-full will-change-transform">
       {(title || icon) && (
         <div className="mb-4 flex flex-col items-center text-center">
           {icon && (

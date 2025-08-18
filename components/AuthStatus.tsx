@@ -10,20 +10,18 @@ export default function AuthStatus() {
     let active = true;
     const update = async () => {
       const fromCookie = getEmailFromSession();
-      if (active && fromCookie) setEmail(fromCookie);
+      if (active) setEmail(fromCookie);
       try {
         const r = await fetch("/api/auth/me", { cache: "no-store" });
         const d = await r.json();
-        if (active) setEmail(d?.email ?? null);
+        if (active && d?.email) setEmail(d.email);
       } catch {}
     };
     update();
-    // Listen for cookie changes after login/logout via storage signal
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === "auth:changed") update();
-    };
-    window.addEventListener("storage", onStorage);
-    return () => { active = false; window.removeEventListener("storage", onStorage); };
+    // Poll for a short period after mount to catch immediate login
+    const id = setInterval(update, 500);
+    setTimeout(() => clearInterval(id), 4000);
+    return () => { active = false; clearInterval(id); };
   }, []);
 
   if (!email) return null;
