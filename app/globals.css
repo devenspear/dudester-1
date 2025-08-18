@@ -39,7 +39,9 @@ body{
 /* Hide app chrome on the login page */
 .route-login header,
 .route-login footer,
-.route-login nav[role="navigation"]{
+.route-login nav[role="navigation"],
+.route-login .safe,
+.route-login .md\:hidden{
   display:none;
 }
 

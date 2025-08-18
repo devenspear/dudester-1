@@ -41,13 +41,9 @@ export default function LoginPage() {
   return (
     <div className="min-h-[100dvh] flex items-center justify-center bg-white">
       <div className="w-full max-w-sm">
-        <div
-          className="rounded-2xl p-[2px]"
-          style={{
-            background: "linear-gradient(90deg,#ff7e3f 0%,#c9712c 40%,#36e2a0 100%)"
-          }}
-        >
-          <div className="card p-6 bg-white">
+        <div className="rounded-2xl p-[2px] shadow-xl"
+          style={{ background: "linear-gradient(90deg,#ff7e3f 0%,#c9712c 40%,#36e2a0 100%)" }}>
+          <div className="rounded-2xl p-6 bg-white border border-base-border">
             <h2 className="h2 mb-4 text-center">Sign in</h2>
             <form
               onSubmit={(e) => {
