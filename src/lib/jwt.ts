@@ -3,8 +3,8 @@ import { SignJWT, jwtVerify } from "jose";
 const DEFAULT_SECRET = "insecure-dev-secret-change-me";
 
 export type SessionPayload = {
-	email: string;
-	name?: string;
+  email: string;
+  name?: string;
 };
 
 function getSecret(): Uint8Array {
@@ -27,6 +27,20 @@ export async function verifySession(token: string): Promise<SessionPayload | nul
 	} catch {
 		return null;
 	}
+}
+
+
+export function decodeSessionEmail(token: string | null): string | null {
+  try {
+    if (!token) return null;
+    const parts = token.split(".");
+    if (parts.length < 2) return null;
+    const json = Buffer.from(parts[1], "base64").toString();
+    const data = JSON.parse(json) as SessionPayload;
+    return data.email ?? null;
+  } catch {
+    return null;
+  }
 }
 
 

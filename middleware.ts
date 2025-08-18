@@ -15,10 +15,9 @@ export async function middleware(req: NextRequest) {
 
   const session = req.cookies.get("session")?.value;
   if (!session || !(await verifySession(session))) {
-    const url = req.nextUrl.clone();
-    url.pathname = "/login";
-    url.searchParams.set("redirect", pathname);
-    return NextResponse.redirect(url);
+    const loginUrl = new URL("https://dudester.ventures/login");
+    loginUrl.searchParams.set("redirect", pathname);
+    return NextResponse.redirect(loginUrl);
   }
   return NextResponse.next();
 }
