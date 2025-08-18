@@ -10,12 +10,16 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/home";
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleDevLogin = async () => {
     setLoading(true);
     try {
       const res = await fetch("/api/dev-login", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
       if (res.ok) {
         router.push(redirect as any);
@@ -32,8 +36,26 @@ export default function LoginPage() {
       <div className="max-w-md mx-auto">
         <Card title="Development Access">
           <p className="text-sm text-base-muted mb-4">
-            Click below to set a development session cookie and access protected pages.
+            Use the shared dev password to sign in with one of the four founder emails.
           </p>
+          <div className="space-y-2 mb-3">
+            <input
+              type="email"
+              className="w-full rounded-2xl border border-base-border bg-base-bg p-3 text-sm"
+              placeholder="email@dudester.xyz"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              className="w-full rounded-2xl border border-base-border bg-base-bg p-3 text-sm"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
           <button
             onClick={handleDevLogin}
             disabled={loading}
@@ -42,7 +64,7 @@ export default function LoginPage() {
             {loading ? "Logging in..." : "Dev Login"}
           </button>
           <p className="text-xs text-base-muted mt-4">
-            Note: Production authentication with email/password will be implemented next.
+            Note: Real auth (Lucia + Prisma) ships next. This route is dev-only.
           </p>
         </Card>
       </div>
