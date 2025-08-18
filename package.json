@@ -1,47 +1,30 @@
 {
   "name": "dudester",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.2.0",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "bash -c 'if [ -n \"$DATABASE_URL\" ] && [ -n \"$VERCEL\" ]; then prisma migrate deploy; fi; next build'",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit",
-    "test": "echo 'No tests yet' && exit 0",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev --name init",
-    "prisma:deploy": "prisma migrate deploy",
-    "prisma:seed": "tsx prisma/seed.ts"
+    "postinstall": "tailwindcss -v >/dev/null 2>&1 || true"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.7",
-    "@heroicons/react": "^2.2.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.23.12",
-    "lucide-react": "^0.536.0",
-    "next": "15.4.5",
-    "next-themes": "^0.4.4",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "tailwind-merge": "^3.3.1",
-    "zod": "^3.23.8",
-    "lucia": "^3.2.0",
-    "@node-rs/argon2": "^2.0.0"
+    "autoprefixer": "^10.4.17",
+    "framer-motion": "^11.2.10",
+    "lucide-react": "^0.446.0",
+    "next": "14.2.5",
+    "next-themes": "^0.3.0",
+    "postcss": "^8.4.35",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tailwindcss": "^3.4.10"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.4.5",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "prisma": "^5.18.0",
-    "@prisma/client": "^5.18.0",
-    "tsx": "^4.19.2"
+    "@types/node": "^20.11.30",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.24",
+    "typescript": "^5.5.4"
   }
 }
