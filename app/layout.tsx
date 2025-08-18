@@ -5,7 +5,6 @@ import { site } from "@/lib/site";
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 import Footer from "@/components/Footer";
-import Footer from "@/components/Footer";
 import { ThemeProvider } from "next-themes";
 import Backdrop from "@/components/Backdrop";
 
