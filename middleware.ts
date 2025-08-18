@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { verifySession } from "@/src/lib/jwt";
 
 const PUBLIC_PATHS = ["/", "/login", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
 
@@ -13,7 +14,7 @@ export function middleware(req: NextRequest) {
   if (isPublic) return NextResponse.next();
 
   const session = req.cookies.get("session")?.value;
-  if (!session) {
+  if (!session || !(await verifySession(session))) {
     const url = req.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("redirect", pathname);
