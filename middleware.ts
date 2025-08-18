@@ -3,7 +3,7 @@ import { verifySession } from "@/src/lib/jwt";
 
 const PUBLIC_PATHS = ["/", "/login", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const isPublic = PUBLIC_PATHS.some((p) => pathname.startsWith(p))
     || pathname.startsWith("/_next")
