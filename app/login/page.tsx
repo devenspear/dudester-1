@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Section from "@/components/Section";
 
 export default function LoginPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/home";
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [email, setEmail] = useState("");
@@ -23,7 +22,7 @@ export default function LoginPage() {
       });
       if (res.ok) {
         setError(null);
-        router.replace(redirect as any);
+        router.replace("/home" as any);
       } else {
         const data = await res.json().catch(() => ({} as any));
         setError(data?.error || "Invalid email or password");
