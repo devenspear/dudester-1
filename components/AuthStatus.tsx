@@ -7,9 +7,12 @@ export default function AuthStatus() {
   const [email, setEmail] = useState<string | null>(null);
 
   useEffect(() => {
-    setEmail(getEmailFromSession());
-    const id = setInterval(() => setEmail(getEmailFromSession()), 500);
-    return () => clearInterval(id);
+    let active = true;
+    const fromCookie = getEmailFromSession();
+    if (fromCookie) setEmail(fromCookie);
+    // Also confirm via server in case cookie parsing fails
+    fetch("/api/auth/me").then(r => r.json()).then(d => { if (active && d?.email) setEmail(d.email); });
+    return () => { active = false; };
   }, []);
 
   if (!email) return null;
