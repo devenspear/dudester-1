@@ -34,6 +34,7 @@ body{
   overflow-x: hidden;
   overscroll-behavior-x: none;
   -webkit-text-size-adjust: 100%;
+  touch-action: pan-y;
 }
 
 /* Hide app chrome on the login page */
@@ -52,7 +53,11 @@ body{
 /* Components */
 .glass{@apply bg-base-card/70 backdrop-blur-xl border border-base-border;}
 .card{@apply rounded-2xl bg-base-card/95 border border-base-border shadow-soft backdrop-blur;}
-.card-hover{@apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-[1.02];}
+.card-hover{@apply transition duration-200;}
+/* Only apply hover lift on devices that actually hover */
+@media (hover: hover) and (pointer: fine){
+  .card-hover:hover{ box-shadow: 0 20px 50px rgba(0,0,0,0.12); transform: translateY(-4px); }
+}
 
 .btn{@apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition border border-base-border bg-base-card hover:bg-base-border/40;}
 .btn-primary{@apply bg-base-fg text-white border-transparent hover:opacity-90;}

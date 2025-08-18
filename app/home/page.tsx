@@ -45,7 +45,7 @@ export default function HomePage() {
 
       {/* Pillars Section with Enhanced Cards */}
       <Section title="Pillars">
-        <div className="grid gap-8 sm:grid-cols-3">
+        <div className="grid gap-6 sm:gap-8 sm:grid-cols-3">
           {PILLARS.map((p, i) => (
             <div 
               key={p.title}
@@ -64,7 +64,7 @@ export default function HomePage() {
 
       {/* Focus & Proof Section - Removed bullets and buttons */}
       <Section title="Focus & Proof">
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-6 sm:gap-8 lg:grid-cols-3">
           <div className="animate-card" style={{ animationDelay: '0s' }}>
             <Card title={HOME.features[0].title} icon={<Hexagon className="h-8 w-8" />}>
               {HOME.features[0].body}
