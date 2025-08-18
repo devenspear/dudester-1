@@ -5,6 +5,8 @@ import { decodeSessionEmail } from "@/src/lib/jwt";
 import LogoutButton from "@/components/LogoutButton";
 import { Suspense } from "react";
 import ClientIdent from "@/components/ClientIdent";
+import dynamic from "next/dynamic";
+const AuthStatus = dynamic(() => import("@/components/AuthStatus"), { ssr: false });
 import { site } from "@/lib/site";
 import { headers } from "next/headers";
 
@@ -34,7 +36,7 @@ export default function Header() {
           <Suspense fallback={email ? <span className="text-xs text-base-muted">{email}</span> : null}>
             <ClientIdent serverEmail={email} />
           </Suspense>
-          {email && <LogoutButton />}
+          <AuthStatus />
         </Link>
         <nav className="hidden md:flex items-center gap-2">
           {site.nav.map((n) => (

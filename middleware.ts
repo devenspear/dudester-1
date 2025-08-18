@@ -12,6 +12,9 @@ export async function middleware(req: NextRequest) {
     || pathname.startsWith("/api/auth");
 
   if (isPublic) return NextResponse.next();
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL("/home", req.url));
+  }
 
   const session = req.cookies.get("session")?.value;
   if (!session || !(await verifySession(session))) {
