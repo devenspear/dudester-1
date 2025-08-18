@@ -18,7 +18,7 @@ export default function LoginPage() {
         method: "POST",
       });
       if (res.ok) {
-        router.push(redirect);
+        router.push(redirect as any);
       }
     } catch (error) {
       console.error("Login failed:", error);
