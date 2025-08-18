@@ -30,6 +30,8 @@ export async function POST(req: Request) {
 			maxAge: 60 * 60 * 24 * 7,
 			path: "/",
 		});
+		// notify clients in other tabs to refresh auth status
+		res.headers.set("x-auth-changed", "1");
 		return res;
 	} catch (e) {
 		return NextResponse.json({ error: "Unexpected error" }, { status: 500 });

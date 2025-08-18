@@ -1,10 +1,5 @@
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
-import { cookies } from "next/headers";
-import { decodeSessionEmail } from "@/src/lib/jwt";
-import LogoutButton from "@/components/LogoutButton";
-import { Suspense } from "react";
-import ClientIdent from "@/components/ClientIdent";
 import dynamic from "next/dynamic";
 const AuthStatus = dynamic(() => import("@/components/AuthStatus"), { ssr: false });
 import { site } from "@/lib/site";
@@ -26,16 +21,11 @@ function NavItem({ href, label }: { href: string; label: string }) {
 }
 
 export default function Header() {
-  const sessionToken = cookies().get("session")?.value || null;
-  const email = decodeSessionEmail(sessionToken);
   return (
     <header className="sticky top-0 z-40 glass">
       <div className="container-max flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="sr-only">Home</span>
-          <Suspense fallback={email ? <span className="text-xs text-base-muted">{email}</span> : null}>
-            <ClientIdent serverEmail={email} />
-          </Suspense>
           <AuthStatus />
         </Link>
         <nav className="hidden md:flex items-center gap-2">

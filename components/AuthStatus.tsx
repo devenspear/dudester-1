@@ -8,11 +8,22 @@ export default function AuthStatus() {
 
   useEffect(() => {
     let active = true;
-    const fromCookie = getEmailFromSession();
-    if (fromCookie) setEmail(fromCookie);
-    // Also confirm via server in case cookie parsing fails
-    fetch("/api/auth/me").then(r => r.json()).then(d => { if (active && d?.email) setEmail(d.email); });
-    return () => { active = false; };
+    const update = async () => {
+      const fromCookie = getEmailFromSession();
+      if (active && fromCookie) setEmail(fromCookie);
+      try {
+        const r = await fetch("/api/auth/me", { cache: "no-store" });
+        const d = await r.json();
+        if (active) setEmail(d?.email ?? null);
+      } catch {}
+    };
+    update();
+    // Listen for cookie changes after login/logout via storage signal
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "auth:changed") update();
+    };
+    window.addEventListener("storage", onStorage);
+    return () => { active = false; window.removeEventListener("storage", onStorage); };
   }, []);
 
   if (!email) return null;

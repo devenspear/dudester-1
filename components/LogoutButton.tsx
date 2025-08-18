@@ -5,6 +5,7 @@ export default function LogoutButton() {
     try {
       await fetch("/api/auth/logout", { method: "POST" });
     } catch {}
+    try { localStorage.setItem("auth:changed", String(Date.now())); } catch {}
     window.location.href = "/login";
   };
 
