@@ -24,6 +24,7 @@ export default function LoginPage() {
       });
       if (res.ok) {
         setError(null);
+        try { localStorage.setItem("auth:changed", String(Date.now())); } catch {}
         router.replace("/home" as any);
       } else {
         const data = await res.json().catch(() => ({} as any));
