@@ -37,34 +37,50 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[100dvh] flex items-center justify-center">
+    <div className="min-h-[100dvh] flex items-center justify-center bg-white">
       <div className="w-full max-w-sm">
-        <form onSubmit={(e)=>{e.preventDefault(); if(!loading) handleDevLogin();}} className="space-y-3">
-          <input
-            type="email"
-            className="w-full rounded-2xl border border-base-border bg-base-bg p-3 text-sm"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            className="w-full rounded-2xl border border-base-border bg-base-bg p-3 text-sm"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button
-            type="submit"
-            disabled={loading || !email || !password}
-            className="btn btn-primary w-full"
-          >
-            {loading ? "Entering…" : "Enter"}
-          </button>
-          {error && <p className="text-xs text-red-600 mt-2">{error}</p>}
-        </form>
+        <div
+          className="rounded-2xl p-[2px]"
+          style={{
+            background: "linear-gradient(90deg,#ff7e3f 0%,#c9712c 40%,#36e2a0 100%)"
+          }}
+        >
+          <div className="card p-6 bg-white">
+            <h2 className="h2 mb-4 text-center">Sign in</h2>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!loading) handleDevLogin();
+              }}
+              className="space-y-3"
+            >
+              <input
+                type="email"
+                className="w-full rounded-2xl border border-base-border bg-white p-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-accent"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <input
+                type="password"
+                className="w-full rounded-2xl border border-base-border bg-white p-3 text-sm focus:outline-none focus:ring-2 focus:ring-base-accent"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button
+                type="submit"
+                disabled={loading || !email || !password}
+                className="btn btn-accent w-full"
+              >
+                {loading ? "Entering…" : "Enter"}
+              </button>
+              {error && <p className="text-xs text-red-600 mt-2">{error}</p>}
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
