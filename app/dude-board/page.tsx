@@ -1,12 +1,9 @@
-import { PrismaClient } from "@prisma/client";
 import Section from "@/components/Section";
 import { DUDE_BOARD_COPY } from "@/content";
 import DudeBoardClient from "./DudeBoardClient";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export default async function DudeBoardPage() {
-  console.log('DudeBoardPage: Fetching ideas from database...');
   const ideas = await prisma.idea.findMany({
     include: {
       dri: {
@@ -30,8 +27,6 @@ export default async function DudeBoardPage() {
     }
   });
 
-  console.log('DudeBoardPage: Found', ideas.length, 'ideas in database');
-  
   // Calculate composite scores for each idea
   const ideasWithScores = ideas.map(idea => {
     const totalVotes = idea.votes.length;
