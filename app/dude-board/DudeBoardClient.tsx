@@ -83,6 +83,7 @@ const categoryColors = {
 };
 
 export default function DudeBoardClient({ initialIdeas, leaderboardStats }: DudeBoardClientProps) {
+  console.log('DudeBoardClient initialIdeas:', initialIdeas?.length || 0, 'ideas');
   const [ideas, setIdeas] = useState<IdeaWithScore[]>(initialIdeas);
   const [selectedIdea, setSelectedIdea] = useState<IdeaWithScore | null>(null);
   const [sortBy, setSortBy] = useState<'top' | 'hot' | 'new'>('top');
