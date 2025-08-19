@@ -118,6 +118,43 @@ body{
   opacity: 0;
 }
 
+/* Utility classes */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Base color utilities */
+.text-base-content { color: hsl(var(--fg)); }
+.text-base-muted { color: hsl(var(--muted)); }
+.bg-base-card { background-color: hsl(var(--card)); }
+.bg-base-light { background-color: hsl(var(--bg)); }
+.border-base-border { border-color: hsl(var(--border)); }
+.bg-base-accent { background-color: hsl(var(--accent)); }
+.bg-base-fg { background-color: hsl(var(--fg)); }
+.shadow-soft { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.text-base-mint { color: hsl(var(--mint)); }
+.bg-base-mint { background-color: hsl(var(--mint)); }
+
+/* Dude Board specific styles */
+.idea-card {
+  background: linear-gradient(135deg, 
+    hsl(var(--card)) 0%, 
+    hsl(var(--card)/0.9) 50%, 
+    hsl(var(--card)/0.8) 100%
+  );
+  border: 1px solid hsl(var(--border));
+}
+
 /* Decorative background helpers */
 .bg-radial{
   background:

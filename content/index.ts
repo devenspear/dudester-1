@@ -7,3 +7,4 @@ export * from "./agenda";
 export * from "./roadmap";
 export * from "./faq";
 export * from "./media";
+export * from "./dude-board";

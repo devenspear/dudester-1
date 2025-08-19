@@ -1,7 +1,7 @@
-// Datasource: Postgres on Vercel (pooled Prisma URL recommended)
+// Datasource: SQLite for local development
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 generator client {
@@ -17,6 +17,12 @@ model User {
   createdAt DateTime @default(now())
   posts     Post[]
   replies   Reply[]
+  
+  // Dude Board relationships
+  ideasOwned    Idea[]          @relation("IdeaDRI")
+  votes         Vote[]
+  ideaComments  IdeaComment[]
+  statusChanges StatusHistory[]
 }
 
 model Post {
@@ -39,6 +45,91 @@ model Reply {
   body      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Idea {
+  id              String          @id @default(cuid())
+  title           String          // ≤60 chars
+  oneLiner        String          // ≤140 chars
+  category        String          // Agent, SaaS, DevTool, etc.
+  status          String          @default("Backlog") // Backlog, Exploring, Building, Launched, Archived
+  dri             User            @relation("IdeaDRI", fields: [driId], references: [id])
+  driId           String
+  tags            String?         // 3-5 relevant tags (comma-separated)
+  
+  // Market & User
+  targetAudience  String?
+  fundamentalNeeds String?        // 3-5 bullets
+  tamSamSom       String?         // TAM/SAM/SOM with source
+  competitiveSet  String?         // 3 names + wedge
+  
+  // Product & Moat
+  coreJourney     String?         // 4-6 steps
+  mustHaveMoment  String?         // The "magic"
+  dataAiAdvantage String?         // How it compounds
+  trustRails      String?         // Blockchain value
+  
+  // Execution
+  effortSize      String?         // S/M/L/XL
+  dependencies    String?         // APIs, partnerships
+  risks           String?         // Risks & assumptions
+  twoWeekWin      String?         // Fast ship opportunity
+  founderRelevance Int?           // 1-5 fit score
+  
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  
+  votes           Vote[]
+  comments        IdeaComment[]
+  statusHistory   StatusHistory[]
+  attachments     Attachment[]
+}
+
+model Vote {
+  id        String   @id @default(cuid())
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  ideaId    String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  stars     Int      // 1-5
+  note      String?  // Required if ≤2 or =5
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([ideaId, userId])
+}
+
+model IdeaComment {
+  id        String   @id @default(cuid())
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  ideaId    String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StatusHistory {
+  id        String   @id @default(cuid())
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  ideaId    String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  fromStatus String
+  toStatus   String
+  note       String?
+  createdAt  DateTime @default(now())
+}
+
+model Attachment {
+  id        String   @id @default(cuid())
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  ideaId    String
+  kind      String   // image, link, file
+  url       String
+  title     String
+  createdAt DateTime @default(now())
 }
 
 

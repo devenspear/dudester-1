@@ -3,6 +3,7 @@ export const site = {
   tagline: "Wisdom-coded. AI-fueled.",
   nav: [
     { href: "/home", label: "Home" },
+    { href: "/dude-board", label: "Dude Board" },
     { href: "/agenda", label: "Agenda" },
     { href: "/about", label: "About" },
     { href: "/organization", label: "Org" },
