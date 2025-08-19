@@ -1,7 +1,7 @@
-// Datasource: SQLite for local development
+// Datasource: PostgreSQL for production (Vercel)
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -55,7 +55,7 @@ model Idea {
   status          String          @default("Backlog") // Backlog, Exploring, Building, Launched, Archived
   dri             User            @relation("IdeaDRI", fields: [driId], references: [id])
   driId           String
-  tags            String?         // 3-5 relevant tags (comma-separated)
+  tags            String[]        // 3-5 relevant tags
   
   // Market & User
   targetAudience  String?

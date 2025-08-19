@@ -40,7 +40,7 @@ export default async function DudeBoardPage() {
       ...idea,
       compositeScore: Math.round(averageScore * 10) / 10,
       totalVotes,
-      tags: idea.tags ? idea.tags.split(',') : []
+      tags: Array.isArray(idea.tags) ? idea.tags : []
     };
   });
 

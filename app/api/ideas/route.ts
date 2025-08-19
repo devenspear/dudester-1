@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
         category: data.category || "Other",
         status: "Backlog",
         driId: userId,
-        tags: Array.isArray(data.tags) ? data.tags.join(',') : (data.tags || null),
+        tags: Array.isArray(data.tags) ? data.tags : [],
         
         // Market & User
         targetAudience: data.targetAudience?.trim() || null,
@@ -114,7 +114,7 @@ export async function GET(request: NextRequest) {
         ...idea,
         compositeScore: Math.round(averageScore * 10) / 10,
         totalVotes,
-        tags: idea.tags ? idea.tags.split(',') : []
+        tags: Array.isArray(idea.tags) ? idea.tags : []
       };
     });
 
