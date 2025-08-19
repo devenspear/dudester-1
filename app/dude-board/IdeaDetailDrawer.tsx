@@ -63,6 +63,47 @@ export default function IdeaDetailDrawer({ idea, onClose }: IdeaDetailDrawerProp
   const [ratingNote, setRatingNote] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
+  const handleEdit = () => {
+    alert('Edit functionality coming soon! This will open the idea in edit mode.');
+  };
+
+  const handleDuplicate = () => {
+    // Copy idea data to clipboard as JSON
+    const ideaData = {
+      title: idea.title + ' (Copy)',
+      oneLiner: idea.oneLiner,
+      category: idea.category,
+      tags: idea.tags,
+      targetAudience: idea.targetAudience,
+      fundamentalNeeds: idea.fundamentalNeeds,
+      tamSamSom: idea.tamSamSom,
+      competitiveSet: idea.competitiveSet,
+      coreJourney: idea.coreJourney,
+      mustHaveMoment: idea.mustHaveMoment,
+      dataAiAdvantage: idea.dataAiAdvantage,
+      trustRails: idea.trustRails,
+      effortSize: idea.effortSize,
+      dependencies: idea.dependencies,
+      risks: idea.risks,
+      twoWeekWin: idea.twoWeekWin,
+      founderRelevance: idea.founderRelevance
+    };
+    
+    navigator.clipboard.writeText(JSON.stringify(ideaData, null, 2));
+    alert('Idea data copied to clipboard! You can paste this into a new idea form.');
+  };
+
+  const handleArchive = async () => {
+    if (confirm('Are you sure you want to archive this idea? It will be moved to archived status.')) {
+      try {
+        // TODO: Implement archive API endpoint
+        alert('Archive functionality coming soon! This will change the idea status to Archived.');
+      } catch (error) {
+        alert('Failed to archive idea.');
+      }
+    }
+  };
+
   const submitRating = async () => {
     if (userRating === 0) return;
     
@@ -128,53 +169,71 @@ export default function IdeaDetailDrawer({ idea, onClose }: IdeaDetailDrawerProp
   };
 
   const renderBriefTab = () => (
-    <div className="space-y-6">
-      <div>
-        <h3 className="font-semibold text-base-content mb-3">Snapshot</h3>
-        <div className="space-y-3">
-          <div>
-            <label className="text-sm font-medium text-base-muted">Title</label>
-            <p className="text-base-content">{idea.title}</p>
-          </div>
-          <div>
-            <label className="text-sm font-medium text-base-muted">One-liner</label>
-            <p className="text-base-content">{idea.oneLiner}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
+    <div className="space-y-8">
+      {/* Key Information Card */}
+      <div className="glass rounded-xl p-6 border border-base-border/50">
+        <h3 className="font-semibold text-base-content mb-4 flex items-center gap-2">
+          <div className="w-2 h-2 bg-base-accent rounded-full"></div>
+          Snapshot
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
             <div>
-              <label className="text-sm font-medium text-base-muted">Category</label>
-              <p className="text-base-content">{idea.category}</p>
+              <label className="text-sm font-medium text-base-muted block mb-1">Title</label>
+              <p className="text-base-content font-medium">{idea.title}</p>
             </div>
             <div>
-              <label className="text-sm font-medium text-base-muted">Status</label>
-              <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium border ${statusColors[idea.status as keyof typeof statusColors] || statusColors.Backlog}`}>
-                {idea.status}
+              <label className="text-sm font-medium text-base-muted block mb-1">One-liner</label>
+              <p className="text-base-content leading-relaxed">{idea.oneLiner}</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-base-muted block mb-1">Category</label>
+              <span className="inline-block px-3 py-1 bg-base-accent/10 text-base-accent rounded-full text-sm font-medium">
+                {idea.category}
               </span>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-4">
             <div>
-              <label className="text-sm font-medium text-base-muted">DRI</label>
-              <p className="text-base-content">{idea.dri.name || idea.dri.email}</p>
+              <label className="text-sm font-medium text-base-muted block mb-1">Status</label>
+              <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium border ${statusColors[idea.status as keyof typeof statusColors] || statusColors.Backlog}`}>
+                {idea.status}
+              </span>
             </div>
             <div>
-              <label className="text-sm font-medium text-base-muted">Founder Relevance</label>
-              <p className="text-base-content">{idea.founderRelevance ? `${idea.founderRelevance}/5` : 'Not rated'}</p>
+              <label className="text-sm font-medium text-base-muted block mb-1">DRI (Directly Responsible Individual)</label>
+              <p className="text-base-content font-medium">{idea.dri.name || idea.dri.email}</p>
             </div>
-          </div>
-          {idea.tags.length > 0 && (
             <div>
-              <label className="text-sm font-medium text-base-muted">Tags</label>
-              <div className="flex flex-wrap gap-1 mt-1">
-                {idea.tags.map((tag, index) => (
-                  <span key={index} className="px-2 py-1 bg-base-border/20 rounded-full text-xs text-base-muted">
-                    {tag.trim()}
-                  </span>
-                ))}
+              <label className="text-sm font-medium text-base-muted block mb-1">Founder Relevance</label>
+              <div className="flex items-center gap-2">
+                <div className="flex">
+                  {[1,2,3,4,5].map(i => (
+                    <Star 
+                      key={i} 
+                      className={`h-4 w-4 ${i <= (idea.founderRelevance || 0) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
+                    />
+                  ))}
+                </div>
+                <span className="text-sm text-base-muted">
+                  {idea.founderRelevance ? `${idea.founderRelevance}/5` : 'Not rated'}
+                </span>
               </div>
             </div>
-          )}
+          </div>
         </div>
+        {idea.tags.length > 0 && (
+          <div className="mt-6 pt-6 border-t border-base-border/20">
+            <label className="text-sm font-medium text-base-muted block mb-3">Tags</label>
+            <div className="flex flex-wrap gap-2">
+              {idea.tags.map((tag, index) => (
+                <span key={index} className="px-3 py-1 bg-base-border/10 border border-base-border/20 rounded-full text-sm text-base-content hover:bg-base-border/20 transition-colors">
+                  #{tag.trim()}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -369,23 +428,59 @@ export default function IdeaDetailDrawer({ idea, onClose }: IdeaDetailDrawerProp
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="glass rounded-2xl max-w-4xl w-full h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-base-border">
-          <div className="flex-1">
-            <h2 className="text-xl font-bold text-base-content mb-1">{idea.title}</h2>
-            <p className="text-base-muted text-sm">{idea.oneLiner}</p>
+        <div className="flex items-start justify-between p-6 border-b border-base-border">
+          <div className="flex-1 mr-6">
+            <div className="flex items-center gap-3 mb-2">
+              <h2 className="text-xl font-bold text-base-content">{idea.title}</h2>
+              <span className={`px-2 py-1 rounded-full text-xs font-medium border ${statusColors[idea.status as keyof typeof statusColors] || statusColors.Backlog}`}>
+                {idea.status}
+              </span>
+            </div>
+            <p className="text-base-muted text-sm mb-3">{idea.oneLiner}</p>
+            <div className="flex items-center gap-4 text-xs text-base-muted">
+              <span>DRI: {idea.dri.name || idea.dri.email}</span>
+              <span>•</span>
+              <span>Created: {new Date(idea.createdAt).toLocaleDateString()}</span>
+              {idea.tags.length > 0 && (
+                <>
+                  <span>•</span>
+                  <span>Tags: {idea.tags.join(', ')}</span>
+                </>
+              )}
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <button className="btn btn-ghost">
+          <div className="flex items-center gap-1">
+            <button 
+              onClick={handleEdit}
+              className="btn btn-ghost btn-sm flex flex-col items-center px-3 py-2 hover:bg-base-hover"
+              title="Edit idea"
+            >
               <Edit className="h-4 w-4" />
+              <span className="text-xs mt-1">Edit</span>
             </button>
-            <button className="btn btn-ghost">
+            <button 
+              onClick={handleDuplicate}
+              className="btn btn-ghost btn-sm flex flex-col items-center px-3 py-2 hover:bg-base-hover"
+              title="Duplicate idea"
+            >
               <Copy className="h-4 w-4" />
+              <span className="text-xs mt-1">Copy</span>
             </button>
-            <button className="btn btn-ghost">
+            <button 
+              onClick={handleArchive}
+              className="btn btn-ghost btn-sm flex flex-col items-center px-3 py-2 hover:bg-base-hover text-red-500 hover:text-red-600"
+              title="Archive idea"
+            >
               <Archive className="h-4 w-4" />
+              <span className="text-xs mt-1">Archive</span>
             </button>
-            <button onClick={onClose} className="btn btn-ghost">
+            <button 
+              onClick={onClose} 
+              className="btn btn-ghost btn-sm flex flex-col items-center px-3 py-2 hover:bg-base-hover ml-2"
+              title="Close"
+            >
               <X className="h-4 w-4" />
+              <span className="text-xs mt-1">Close</span>
             </button>
           </div>
         </div>
