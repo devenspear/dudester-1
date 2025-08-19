@@ -14,18 +14,17 @@ const icons = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero Section with Full Background Image */}
-      <div className="relative w-full">
-        {/* Background Image Container */}
-        <div 
-          className="w-full h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px]"
-          style={{
-            backgroundImage: 'url("/images/hero-background.jpeg")',
-            backgroundSize: 'contain',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: '#0B0B0C'
-          }}
+      {/* Hero Section with Looping Video */}
+      <div className="relative w-full h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-3xl border border-base-border">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/videos/hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster="/images/hero-background.jpeg"
         />
       </div>
 
