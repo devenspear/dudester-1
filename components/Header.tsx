@@ -13,7 +13,7 @@ function NavItem({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href as any}
-      className={`text-sm rounded-xl px-3 py-1 transition ${
+      className={`text-base font-semibold rounded-xl px-3 py-1 transition ${
         active ? "bg-base-border/60" : "hover:bg-base-border/40"
       }`}
     >
@@ -47,7 +47,7 @@ export default function Header() {
         <div className="md:hidden border-t border-base-border bg-base-card">
           <div className="container-max py-2 flex flex-wrap gap-2">
             {site.nav.map((n) => (
-              <Link key={n.href} href={n.href as any} className="text-sm rounded-xl px-3 py-1 hover:bg-base-border/40">
+              <Link key={n.href} href={n.href as any} className="text-base font-semibold rounded-xl px-3 py-1 hover:bg-base-border/40">
                 {n.label}
               </Link>
             ))}
