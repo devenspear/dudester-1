@@ -85,7 +85,7 @@ export default function NewIdeaModal({ onClose, onSuccess }: NewIdeaModalProps) 
       }
     } catch (error) {
       console.error('Network Error:', error);
-      alert(`Network Error: ${error.message || 'Failed to create idea'}`);
+      alert(`Network Error: ${error instanceof Error ? error.message : 'Failed to create idea'}`);
     } finally {
       setIsSubmitting(false);
     }
